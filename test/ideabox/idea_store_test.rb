@@ -35,4 +35,31 @@ class IdeaStoreTest < Minitest::Test
     assert_equal "inspiration", idea.title
     assert_equal "looking at the stars", idea.description
   end
+
+  def test_update_idea
+    idea = Idea.new("drink", "tomato juice")
+    id = IdeaStore.save(idea)
+
+    idea = IdeaStore.find(id)
+    idea.title = "cocktails"
+    idea.description = "spicy tomato juice with vodka"
+
+    IdeaStore.save(idea)
+
+    assert_equal 1, IdeaStore.count
+
+    idea = IdeaStore.find(id)
+    assert_equal "cocktails", idea.title
+    assert_equal "spicy tomato juice with vodka",idea.description
+  end
+
+  def test_delete_an_idea
+    id1 = IdeaStore.save Idea.new "song", "99 bottles of beer"
+    id2 = IdeaStore.save Idea.new "gift", "mickey mouse belt"
+    id3 = IdeaStore.save Idea.new "dinner", "cheeseburger with bacon and avacado"
+
+    assert_equal ["song", "gift", "dinner"], IdeaStore.all.map(&:title)
+    IdeaStore.delete(id2)
+    assert_equal ["song", "dinner"], IdeaStore.all.map(&:title)
+  end
 end
