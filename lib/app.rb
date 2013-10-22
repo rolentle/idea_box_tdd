@@ -6,4 +6,5 @@ class IdeaboxApp < Sinatra::Base
   get '/' do
     erb :index, locals: { ideas: IdeaStore.all }
   end
+
 end
