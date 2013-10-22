@@ -1,22 +1,21 @@
 class IdeaStore
 
   def self.save(idea)
-    @all ||= []
     idea.id ||= next_id
-    @all[idea.id] = idea
+    all[idea.id] = idea
     idea.id
   end
 
   def self.count
-    @all.length
+    all.length
   end
 
   def self.find(id)
-    @all[id]
+    all[id]
   end
 
   def self.next_id
-    @all.size
+    all.size
   end
 
   def self.delete_all
@@ -24,10 +23,10 @@ class IdeaStore
   end
 
   def self.all
-    @all
+    @all ||= []
   end
 
   def self.delete(idea)
-    @all.delete_at(idea)
+    all.delete_at(idea)
   end
 end

@@ -1,6 +1,7 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
+require './test/test_helper'
 require './lib/ideabox/idea'
 require './lib/ideabox/idea_store'
 
