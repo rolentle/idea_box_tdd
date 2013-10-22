@@ -37,7 +37,7 @@ class IdeaboxAppHelper < MiniTest::Test
 
     idea = IdeaStore.find(id)
     assert_equal 'yodle', idea.title
-     assert_equal 'joyful songs', idea.description
+    assert_equal 'joyful songs', idea.description
   end
 
   def test_delete_idea
@@ -60,4 +60,5 @@ class IdeaboxAppHelper < MiniTest::Test
     assert_equal 'costume', idea.title
     assert_equal 'scary vampire', idea.description
   end
+
 end

@@ -14,11 +14,14 @@
    <ul>
      <% ideas.each do |idea| %>
        <li id="idea_<%= idea.id %>">
-         <%= idea.title %>-<%= idea.description %>
+       <%= idea.rank %>: <%= idea.title %>-<%= idea.description %>
 	 <a href="/<%= idea.id %>">Edit</a>
 	 <form action='/<%= idea.id %>' method='POST'>
 	   <input type='hidden' name='_method' value='DELETE'>
 	   <input type='submit' value='Delete'>
+	 </form>
+	 <form action='/<%= idea.id %>/like' name='_method' value='display: inline'>
+	   <input type='submit' value='+' />
 	 </form>
        </li>
      <% end%>
