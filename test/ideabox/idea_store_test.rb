@@ -63,4 +63,14 @@ class IdeaStoreTest < Minitest::Test
     IdeaStore.delete(id2)
     assert_equal ["song", "dinner"], IdeaStore.all.map(&:title)
   end
+
+  def test_find_by_title
+    IdeaStore.save Idea.new("dance", "like it's the 80s")
+    IdeaStore.save Idea.new("sleep", "like a baby")
+    IdeaStore.save Idea.new("dream", "like anything is possible")
+
+    idea = IdeaStore.find_by_title("sleep")
+
+    assert_equal "like a baby", idea.description
+  end
 end

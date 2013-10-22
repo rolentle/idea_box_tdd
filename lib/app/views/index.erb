@@ -3,10 +3,24 @@
     <title>IdeaBox</title>
   </head>
   <body>
-   <h1>Ideas</h1>
+   <h1>Add a new Idea</h1>
+   <form action="/" method="POST">
+     <input type='text' name='title'/><br />
+     <textarea name='description'></textarea><br />
+     <input type='submit' value='Save'/>
+   </form>
+
+   <h2>Your ideas</h2>
    <ul>
      <% ideas.each do |idea| %>
-       <li><%= idea.title %>-<%= idea.description %></li>
+       <li id="idea_<%= idea.id %>">
+         <%= idea.title %>-<%= idea.description %>
+	 <a href="/<%= idea.id %>">Edit</a>
+	 <form action='/<%= idea.id %>' method='POST'>
+	   <input type='hidden' name='_method' value='DELETE'>
+	   <input type='submit' value='Delete'>
+	 </form>
+       </li>
      <% end%>
    </ul>
    </body>

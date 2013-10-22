@@ -29,4 +29,8 @@ class IdeaStore
   def self.delete(idea)
     all.delete_at(idea)
   end
+
+  def self.find_by_title(title)
+    all.find { |idea| idea.title == title }
+  end
 end
