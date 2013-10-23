@@ -104,5 +104,49 @@ class IdeaManagementTest < Minitest::Test
     assert page.has_content?('pony, betting'), "tags are no appearing"
   end
 
+  def test_clicking_tags_takes_you_to_tag_page
+    id1 = IdeaStore.save Idea.new("childcare","candy", "my idea, stupid")
+    IdeaStore.save Idea.new("cooking","creme brulee", "my idea, good")
+    IdeaStore.save Idea.new("fitness","crosstfit", "bryana's idea, good")
+
+    visit '/'
+
+    within "#idea_#{id1}" do
+      click_link "my idea"
+    end
+
+    assert page.has_content?("candy"), "Where is candy?"
+    assert page.has_content?("cooking"), "Do you smell what I am cooking?"
+    refute page.has_content?("fitness"), "Bryana has stupid ideas"
+  end
+
+  def test_ideas_are_sorted_on_the_page
+    IdeaStore.save Idea.new("cooking","creme brulee", "my idea, good")
+    IdeaStore.save Idea.new("fitness","crosstfit", "not my idea, good")
+    IdeaStore.save Idea.new("stuff","example")
+
+    visit '/sorted_tags'
+
+    within '#tag_good' do
+      assert page.has_content? "cooking"
+      assert page.has_content? "fitness"
+    end
+
+    within '#tag_my_idea' do
+      assert page.has_content? "cooking"
+      refute page.has_content? "fitness"
+    end
+
+    within(:css,"ul#tag_not_my_idea") do
+      refute page.has_content? "cooking"
+      assert page.has_content? "fitness"
+    end
+
+    within( :css, "ul#tag_no_tags") do
+      assert page.has_content? "stuff"
+      refute page.has_content? "cooking"
+      refute page.has_content? "fitness"
+    end
+  end
 end
 

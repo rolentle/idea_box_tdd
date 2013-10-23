@@ -74,4 +74,18 @@ class IdeaboxAppHelper < MiniTest::Test
     assert_match /Nas/, last_response.body
     refute_match /John Mayer/, last_response.body
   end
+
+  def test_show_by_sorted_tags
+    IdeaStore.save Idea.new "music", "Kayne West", "rap"
+    IdeaStore.save Idea.new "bad music", "Nas", "rap"
+    IdeaStore.save Idea.new "white people music", "John Mayer", "rock"
+
+    get '/sorted_tags'
+
+    refute_equal 404, last_response.status
+    assert_match /Kayne West/, last_response.body
+    assert_match /Nas/, last_response.body
+    assert_match /John Mayer/, last_response.body
+  end
+
 end

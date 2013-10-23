@@ -85,4 +85,14 @@ class IdeaStoreTest < Minitest::Test
     assert_equal 2, music_ideas.count
     assert_equal 1, person_idea.count
   end
+
+  def test_sorted_by_tags
+    IdeaStore.save Idea.new("song", "fat lip", "music, punk")
+    IdeaStore.save Idea.new("other song", "I am a God", "music, rap")
+    IdeaStore.save Idea.new("person", "sid vicious", "person, punk")
+
+    assert_equal 2, IdeaStore.sorted_by_tags['music'].count
+    assert_equal 1, IdeaStore.sorted_by_tags['person'].count
+ end
+
 end

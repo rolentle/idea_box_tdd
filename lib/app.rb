@@ -14,6 +14,10 @@ class IdeaboxApp < Sinatra::Base
     redirect '/'
   end
 
+  get'/sorted_tags' do
+    erb :sorted_tags, locals: { sorted_ideas: IdeaStore.sorted_by_tags}
+  end
+
   get '/:id' do |id|
     idea = IdeaStore.find(id.to_i)
     erb :edit, locals: {idea: idea}

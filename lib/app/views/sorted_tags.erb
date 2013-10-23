@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>IdeaBox</title>
+  </head>
+  <body>
+   <h1>Ideas Sorted By Tag</h1>
+   <% sorted_ideas.each do |tag, ideas| %>
+     <ul id="tag_<%= tag.gsub" ","_" %>"> <h3><%= tag %> Ideas</h3>
+       <% ideas.each do |idea| %>
+         <li id="idea_<%= idea.id %>">
+         <form action='/<%= idea.id %>/like' name='_method' value='display: inline'>
+	     <input type='submit' value='+' />
+         </form>
+         <%= idea.rank %>: <%= idea.title %>-<%= idea.description %><br />
+         <% unless idea.tags == "no tags" %>
+	   <% idea.tags.each do |tag| %>
+	      <a href="/tags/<%= tag.gsub " " , "%20" %>"><%= tag %></a>,
+           <% end %>
+         <% end %>
+	 <a href="/<%= idea.id %>">Edit</a>
+	 <form action='/<%= idea.id %>' method='POST'>
+	   <input type='hidden' name='_method' value='DELETE'>
+	   <input type='submit' value='Delete'>
+	 </form>
+       </li>
+       <% end%>
+   </ul>
+   <% end %>
+  </body>
+ </html>

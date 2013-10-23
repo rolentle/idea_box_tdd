@@ -38,4 +38,14 @@ class IdeaStore
     tag = tag.downcase
     all.select { |idea| idea.tags.include?(tag) }
   end
+
+  def self.sorted_by_tags
+     all_tags.each_with_object({}) do  |tag, ideas|
+       ideas[tag] = find_all_by_tag(tag)
+     end
+  end
+
+  def self.all_tags
+     all.flat_map { |idea| idea.tags }.uniq
+  end
 end
