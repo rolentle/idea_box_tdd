@@ -1,8 +1,3 @@
-<html>
-  <head>
-    <title>IdeaBox</title>
-  </head>
-  <body>
     <h1>Edit your idea</h1>
     <form action='/<%= idea.id %>' method='POST'>
       <input type='hidden' name='_method' value='PUT'>
@@ -12,5 +7,3 @@
       <textarea name='description'><%= idea.description %></textarea>
       <input type='submit' value='Save' />
     </form>
-  </body>
-</html>

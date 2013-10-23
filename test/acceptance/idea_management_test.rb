@@ -153,19 +153,19 @@ class IdeaManagementTest < Minitest::Test
     idea1 = Idea.new "stuff", "more stuff"
     idea2 = Idea.new "examples", "more examples"
 
-    idea2.created_at = (idea2.created_at.to_time - 60).to_datetime
+    idea2.created_at = (idea2.created_at.to_time - 60*60).to_datetime
 
     IdeaStore.save idea1
     IdeaStore.save idea2
 
     visit '/sorted_by_hours'
 
-    within "#hour_#{idea2.created_at.hour}" do
-      assert page.has_content? "stuff"
+    within "#hour_#{idea1.created_at.hour}" do
+      assert page.has_content?( "stuff")
       refute page.has_content? "example"
     end
 
-    within "#hour_#{idea1.created_at.hour}" do
+    within "#hour_#{idea2.created_at.hour}" do
       assert page.has_content? "example"
       refute page.has_content? "stuff"
     end

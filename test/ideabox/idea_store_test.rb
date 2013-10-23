@@ -105,4 +105,20 @@ class IdeaStoreTest < Minitest::Test
 
    refute_equal u_time, idea.updated_at
  end
+
+ def test_sort_by_hour_works
+   idea = Idea.new("duck", "duck", "goose")
+   idea3 = Idea.new("moo", "duck", "goose")
+   idea2 = Idea.new("hours", "duck", "goose")
+
+   idea2.created_at = (idea2.created_at.to_time - 60*60).to_datetime
+
+   IdeaStore.save(idea)
+   IdeaStore.save(idea2)
+   IdeaStore.save(idea3)
+
+   assert_equal 1, IdeaStore.sorted_by_hour[idea2.created_at.hour].count
+   assert_equal 2, IdeaStore.sorted_by_hour[idea.created_at.hour].count
+ end
+
 end

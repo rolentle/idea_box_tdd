@@ -1,7 +1,7 @@
-   <h1>Ideas Sorted By Tag</h1>
-   <% sorted_ideas.each do |tag, ideas| %>
+<h1>Ideas Sorted By Hours</h1>
+   <% ideas.each do |hour, ideas| %>
      <% next if ideas.empty? %>
-     <ul id="tag_<%= tag.gsub" ","_" %>"> <h3><%= tag %> Ideas</h3>
+     <ul id="hour_<%=hour %>"><h3>Ideas for Hour <%=hour %></h3>
        <% ideas.each do |idea| %>
          <li id="idea_<%= idea.id %>">
          <form action='/<%= idea.id %>/like' name='_method' value='display: inline'>

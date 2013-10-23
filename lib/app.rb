@@ -18,8 +18,8 @@ class IdeaboxApp < Sinatra::Base
     erb :sorted_tags, locals: { sorted_ideas: IdeaStore.sorted_by_tags}
   end
 
-  get 'sorted_by_hours' do
-    erb :sorted_by_hours, locals: { ideas_sorted_by_hour: IdeaStore.sorted_by_hour }
+  get '/sorted_by_hours' do
+    erb :sorted_by_hours, locals: { ideas: IdeaStore.sorted_by_hour }
   end
 
   get '/:id' do |id|

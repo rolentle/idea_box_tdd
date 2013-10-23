@@ -49,4 +49,8 @@ class IdeaStore
   def self.all_tags
      all.flat_map { |idea| idea.tags }.uniq << "no tags"
   end
+
+  def self.sorted_by_hour
+    all.group_by { |idea| idea.created_at.hour }
+  end
 end
