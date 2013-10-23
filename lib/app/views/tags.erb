@@ -3,18 +3,7 @@
     <title>IdeaBox</title>
   </head>
   <body>
-   <h1>Add a new Idea</h1>
-   <form action="/" method="POST">
-     Title:<br />
-     <input type='text' name='title'/><br />
-     Description:<br />
-     <textarea name='description'></textarea><br />
-     Tags(Comma Delimited): <br/>
-     <input type='text' name='tags' /><br />
-     <input type='submit' value='Save'/>
-   </form>
-
-   <h2>Your ideas</h2>
+   <h1>Your ideas</h1>
    <ul>
      <% ideas.each do |idea| %>
        <li id="idea_<%= idea.id %>">

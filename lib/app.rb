@@ -9,7 +9,7 @@ class IdeaboxApp < Sinatra::Base
   end
 
   post '/' do
-    idea = Idea.new params[:title], params[:description]
+    idea = Idea.new params[:title], params[:description], params[:tags]
     IdeaStore.save(idea)
     redirect '/'
   end
@@ -37,6 +37,10 @@ class IdeaboxApp < Sinatra::Base
     idea.like!
     IdeaStore.save(idea)
     redirect '/'
+  end
+
+  get'/tags/:tag' do |tag|
+    erb :tags, locals: {ideas: IdeaStore.find_all_by_tag(tag) }
   end
 
 end

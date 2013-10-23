@@ -92,4 +92,17 @@ class IdeaManagementTest < Minitest::Test
     assert_match /a book about being brave/, ideas[1].text
     assert_match /ride horse/, ideas[2].text
   end
+
+  def test_create_idea_with_tag
+    visit '/'
+
+    fill_in 'title', :with => 'stuff'
+    fill_in 'description', :with => 'horse'
+    fill_in 'tags', :with => 'pony, betting'
+    click_button "Save"
+
+    assert page.has_content?('pony, betting'), "tags are no appearing"
+  end
+
 end
+

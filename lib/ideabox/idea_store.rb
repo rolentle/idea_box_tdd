@@ -33,4 +33,9 @@ class IdeaStore
   def self.find_by_title(title)
     all.find { |idea| idea.title == title }
   end
+
+  def self.find_all_by_tag(tag)
+    tag = tag.downcase
+    all.select { |idea| idea.tags.include?(tag) }
+  end
 end

@@ -73,4 +73,16 @@ class IdeaStoreTest < Minitest::Test
 
     assert_equal "like a baby", idea.description
   end
+
+  def test_find_all_by_tag
+    IdeaStore.save Idea.new("song", "fat lip", "music, punk")
+    IdeaStore.save Idea.new("other song", "I am a God", "music, rap")
+    IdeaStore.save Idea.new("person", "sid vicious", "person, punk")
+
+    music_ideas = IdeaStore.find_all_by_tag("music")
+    person_idea = IdeaStore.find_all_by_tag("person")
+
+    assert_equal 2, music_ideas.count
+    assert_equal 1, person_idea.count
+  end
 end

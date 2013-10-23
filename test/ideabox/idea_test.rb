@@ -40,5 +40,11 @@ class IdeaTest < Minitest::Test
     assert_equal [diet, drink, exercise], ideas.sort
   end
 
+  def test_ideas_have_tags
+    vg = Idea.new("games", "halo", "halo, half life")
+
+    assert_equal ['halo', 'half life'], vg.tags
+  end
+
 end
 

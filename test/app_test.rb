@@ -52,13 +52,26 @@ class IdeaboxAppHelper < MiniTest::Test
   end
 
   def test_create_idea
-    post '/', title: 'costume', description: 'scary vampire'
+    post '/', title: 'costume', description: 'scary vampire', tags: 'edward, bill'
 
     assert_equal 1, IdeaStore.count
 
     idea = IdeaStore.all.first
     assert_equal 'costume', idea.title
     assert_equal 'scary vampire', idea.description
+    assert_equal ['edward', 'bill'], idea.tags
   end
 
+  def test_show_by_certain_tag
+    IdeaStore.save Idea.new "music", "Kayne West", "rap"
+    IdeaStore.save Idea.new "bad music", "Nas", "rap"
+    IdeaStore.save Idea.new "white people music", "John Mayer", "rock"
+
+    get '/tags/rap'
+
+    refute_equal 404, last_response.status
+    assert_match /Kayne West/, last_response.body
+    assert_match /Nas/, last_response.body
+    refute_match /John Mayer/, last_response.body
+  end
 end
