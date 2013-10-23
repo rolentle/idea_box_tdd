@@ -95,4 +95,14 @@ class IdeaStoreTest < Minitest::Test
     assert_equal 1, IdeaStore.sorted_by_tags['person'].count
  end
 
+ def test_save_changes_idea_updated_at
+   idea = Idea.new("duck", "duck", "goose")
+   u_time =  idea.updated_at
+   IdeaStore.save(idea)
+
+   idea.title = "mallard"
+   IdeaStore.save(idea)
+
+   refute_equal u_time, idea.updated_at
+ end
 end

@@ -5,6 +5,7 @@
   <body>
    <h1>Ideas Sorted By Tag</h1>
    <% sorted_ideas.each do |tag, ideas| %>
+     <% next if ideas.empty? %>
      <ul id="tag_<%= tag.gsub" ","_" %>"> <h3><%= tag %> Ideas</h3>
        <% ideas.each do |idea| %>
          <li id="idea_<%= idea.id %>">

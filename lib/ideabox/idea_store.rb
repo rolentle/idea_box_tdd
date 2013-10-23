@@ -2,6 +2,7 @@ class IdeaStore
 
   def self.save(idea)
     idea.id ||= next_id
+    idea.updated_at = DateTime.now
     all[idea.id] = idea
     idea.id
   end
@@ -46,6 +47,6 @@ class IdeaStore
   end
 
   def self.all_tags
-     all.flat_map { |idea| idea.tags }.uniq
+     all.flat_map { |idea| idea.tags }.uniq << "no tags"
   end
 end

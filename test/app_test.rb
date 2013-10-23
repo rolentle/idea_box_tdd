@@ -88,4 +88,19 @@ class IdeaboxAppHelper < MiniTest::Test
     assert_match /John Mayer/, last_response.body
   end
 
+  def test_show_by_sorted_hours
+    idea1 = Idea.new "music", "Kayne West", "rap"
+    IdeaStore.save idea1
+    IdeaStore.save Idea.new "bad music", "Nas", "rap"
+    IdeaStore.save Idea.new "white people music", "John Mayer", "rock"
+
+    get '/sorted_by_hours'
+
+    refute_equal 404, last_response.status
+    assert last_response.body.include?("Ideas for Hour #{idea1.created_at.hour}"), "Titles aren't working"
+    assert_match /Kayne West/, last_response.body
+    assert_match /Nas/, last_response.body
+    assert_match /John Mayer/, last_response.body
+  end
+
 end

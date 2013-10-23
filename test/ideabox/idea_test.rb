@@ -46,5 +46,12 @@ class IdeaTest < Minitest::Test
     assert_equal ['halo', 'half life'], vg.tags
   end
 
+  def test_ideas_have_created_at_and_updated_at
+    idea = Idea.new("hello", "world", "boring, test")
+
+    assert idea.created_at, "No created at"
+    assert idea.updated_at, "No updated at"
+  end
+
 end
 
