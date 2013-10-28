@@ -1,4 +1,5 @@
 require './lib/ideabox'
+require 'json'
 
 class IdeaboxApp < Sinatra::Base
   set :method_override, true
@@ -15,7 +16,12 @@ class IdeaboxApp < Sinatra::Base
   end
 
   get'/sorted_tags' do
-    erb :sorted_tags, locals: { sorted_ideas: IdeaStore.sorted_by_tags}
+    data = {}
+    data[:tags] = []
+    tag_data = IdeaStore.sorted_by_tags.each do |tag, ideas|
+      data[:tags] << {tag: tag.to_s,count: ideas.count}
+    end
+    erb :sorted_tags, locals: { sorted_ideas: IdeaStore.sorted_by_tags, data: data.to_json.to_s }
   end
 
   get '/sorted_by_hours' do

@@ -1,8 +1,46 @@
 <html>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.10.1.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <head>
     <title>IdeaBox</title>
   </head>
   <body>
+<div class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">ThoughtCapsule</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Compose Thought</a></li>
+      <li class="dropdown">
+        <a href=".dropdown-menu" class="dropdown-toggle" data-toggle="dropdown">Sorted By<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+	  <li><a href="/sorted_tags">Tags</a></li>
+          <li><a href="/sorted_by_hours">Hour Created</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
 
   <%= yield %>
 
